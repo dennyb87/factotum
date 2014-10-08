@@ -26,10 +26,10 @@ SYSCTL_PATH="/etc/sysctl.conf"
 SWAP=%d       
 CACHE=%d        
 STARTAPP=%d 
-JAVA=%s
-JAVA_PPA=%s 
-RESTRICTED_EXTRAS=%s 
-PACKAGES=%s
+JAVA="%s"
+JAVA_PPA="%s" 
+RESTRICTED_EXTRAS="%s" 
+PACKAGES="%s"
         
             
 #User choice Yes/No
