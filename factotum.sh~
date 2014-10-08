@@ -80,17 +80,17 @@ fi
 #If the version of java requires the addition of a repository
 if [ -n "$JAVA_PPA" ]; then
     sudo add-apt-repository $PPA </dev/tty
-    sudo apt-get update
+    sudo apt-get update </dev/tty
 fi
 
 #Install JAVA
 if [ -n "$JAVA" ]; then
-    sudo apt-get install $JAVA
+    sudo apt-get install $JAVA </dev/tty
 fi
   
 #Install RESTRICTED_EXTRAS
 if [ -n "$RESTRICTED_EXTRAS" ]; then
-    sudo apt-get install $RESTRICTED_EXTRAS
+    sudo apt-get install $RESTRICTED_EXTRAS </dev/tty
 fi
    
 #If restricted-extras has been installed will run install-css.sh 
