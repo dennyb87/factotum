@@ -26,7 +26,7 @@ You can customize the script directly from the project site (http://factotum-tel
 * Packages = "VLC Media Player", "Synaptic", "GKsu"
 
 
-Simply copy and paste the following code into a terminal, and press enter to start the standard script:
+Simply copy and paste the following code into a terminal, and press enter to download and start the standard full version of the script:
 
 ```wget -q -O - https://factotum-telnetboy.rhcloud.com/factotum.sh | bash```
 
