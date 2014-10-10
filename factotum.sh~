@@ -78,6 +78,8 @@ echo
 optimize_sysctl $SWAP_STR $SWAP
 optimize_sysctl $CACHE_STR $CACHE
    
+exit 0
+   
 echo
 echo "Show startup applications"
  
