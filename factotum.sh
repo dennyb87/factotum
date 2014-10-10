@@ -20,11 +20,15 @@
 #See the project on Github <https://github.com/dennyb87/factotum>
 #Visit the website <https://factotum-telnetboy.rhcloud.com>
 
+
+
 #Check root privileges
-if [ $EUID -ne 0 ]; then
-   echo "Factotum must be run as root!" 
-   exit 1
-fi
+#if [ $EUID -ne 0 ]; then
+#   echo "Factotum must be run as root!" 
+#   exit 1
+#fi
+
+
 
 #Don't change these
 SWAP_STR="vm.swappiness="
@@ -57,13 +61,13 @@ user_choice () {
 optimize_sysctl () {
     if grep --quiet $1 $SYSCTL_PATH; then
         echo
-        sed --in-place "/^$1/ d" $SYSCTL_PATH
+        sudo sed --in-place "/^$1/ d" $SYSCTL_PATH
     fi
         echo "Set "$1$2""
         cp $SYSCTL_PATH /tmp/
         echo $1$2 >> /tmp/sysctl.conf
-        cp /tmp/sysctl.conf $SYSCTL_PATH
-        rm /tmp/sysctl.conf
+        sudo cp /tmp/sysctl.conf $SYSCTL_PATH
+        sudo rm /tmp/sysctl.conf
 }
     
 echo
@@ -74,6 +78,8 @@ echo
 optimize_sysctl $SWAP_STR $SWAP
 optimize_sysctl $CACHE_STR $CACHE
    
+exit 0
+   
 echo
 echo "Show startup applications"
  
@@ -81,36 +87,36 @@ echo "Show startup applications"
 cd /etc/xdg/autostart/
         
 if [ $STARTAPP = 1 ]; then            
-    sed --in-place 's/NoDisplay=true/NoDisplay=false/g' *.desktop
+    sudo sed --in-place 's/NoDisplay=true/NoDisplay=false/g' *.desktop
 else
-    sed --in-place 's/NoDisplay=false/NoDisplay=true/g' *.desktop
+    sudo sed --in-place 's/NoDisplay=false/NoDisplay=true/g' *.desktop
 fi
 
 cd
       
 #If the version of java requires the addition of a repository
 if [ -n "$JAVA_PPA" ]; then
-    add-apt-repository $JAVA_PPA && apt-get update </dev/tty    
+    sudo add-apt-repository $JAVA_PPA && sudo apt-get update </dev/tty    
 fi
 
 #Install JAVA
 if [ -n "$JAVA" ]; then
-    apt-get install $JAVA </dev/tty
+    sudo apt-get install $JAVA </dev/tty
 fi
   
 #Install RESTRICTED_EXTRAS
 if [ -n "$RESTRICTED_EXTRAS" ]; then
-    apt-get install $RESTRICTED_EXTRAS </dev/tty
+    sudo apt-get install $RESTRICTED_EXTRAS </dev/tty
 fi
    
 #If restricted-extras has been installed will run install-css.sh 
 if dpkg-query -W $RESTRICTED; then
-    /usr/share/doc/libdvdread4/install-css.sh </dev/tty
+    sudo /usr/share/doc/libdvdread4/install-css.sh </dev/tty
 fi
 
 #Install the packages
 for package in $PACKAGES; do
-    apt-get install $package </dev/tty
+    sudo apt-get install $package </dev/tty
 done
 
 echo
